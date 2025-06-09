@@ -12,7 +12,11 @@ export const dropdown = function (name, options, optionsClassName = "", classes 
   const make = function () {
     const container = document.createElement("div");
     container.id = `div-${name}`;
-
+    
+    //Change div display to only take up as much space as needed.
+    container.style.display = "inline-flex";
+    container.style.flexDirection = "column";
+    
     const optionsDiv = makeOptionsDiv();
     const button = makeButton(optionsDiv);
     
@@ -50,6 +54,9 @@ export const dropdown = function (name, options, optionsClassName = "", classes 
   const makeOptionsDiv = function () {
     const optionsContainer = document.createElement("div");
     optionsContainer.classList.add("hidden");
+
+    optionsContainer.style.display = "flex";
+    optionsContainer.style.flexDirection = "column";
 
     for (let optionName in options) {
       const callbackFunction = options[optionName];
