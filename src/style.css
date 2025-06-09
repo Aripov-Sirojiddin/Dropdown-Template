@@ -1,0 +1,7 @@
+.hidden {
+  visibility: hidden;
+}
+button {
+  border: none;
+  background: yellow;
+}

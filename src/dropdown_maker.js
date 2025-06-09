@@ -4,7 +4,7 @@
   @param optionsClassName : String - A class to add to all options button for styling. 
   @param classes : Array of Strings - an array of any additional classes to be applied to the button. 
   */
-const dropdown = function (name, options, optionsClassName = "", classes = []) {
+export const dropdown = function (name, options, optionsClassName = "", classes = []) {
   /*
   @description Creates a div container, which holds button and options div.
   @returns div : HTML element - returns the div container and the children. Sets the ID of div to `div-${@param name}`
@@ -14,7 +14,7 @@ const dropdown = function (name, options, optionsClassName = "", classes = []) {
     container.id = `div-${name}`;
 
     const optionsDiv = makeOptionsDiv();
-    const button = makeButton(()=> optionsDiv.classList.toggle("hidden"));
+    const button = makeButton(optionsDiv);
 
     container.appendChild(button);
     container.appendChild(optionsDiv);
@@ -25,15 +25,16 @@ const dropdown = function (name, options, optionsClassName = "", classes = []) {
   /*
   Helper function for make();
   @description Creates a button with {@param name} which when hovered over reveals the options in a list format.
-  @param action : Function - A callback function to do when button is clicked.
+  @param optionsDiv : HTML element - A container holding all the options.
   @returns button : HTML element. 
   */
-  const makeButton = function (action) {
+  const makeButton = function (optionsDiv) {
     const button = document.createElement("button");
     button.textContent = name;
 
     //Set click event to trigger action callback function.
-    button.addEventListener("mouseover", action);
+    button.addEventListener("mouseover", () => optionsDiv.classList.remove("hidden"));
+    button.addEventListener("mouseout", () => optionsDiv.classList.add("hidden"));
 
     classes.forEach((additional_class) => {
       button.classList.add(additional_class);
@@ -56,7 +57,8 @@ const dropdown = function (name, options, optionsClassName = "", classes = []) {
 
       const button = document.createElement("button");
       button.textContent = optionName;
-      button.classList.add(optionsClassName);
+      if(optionsClassName.length > 0)
+        button.classList.add(optionsClassName);
 
       button.addEventListener("click", callbackFunction);
       optionsContainer.appendChild(button);
