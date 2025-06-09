@@ -15,6 +15,10 @@ export const dropdown = function (name, options, optionsClassName = "", classes 
 
     const optionsDiv = makeOptionsDiv();
     const button = makeButton(optionsDiv);
+    
+    //Show the options div on hover
+    container.addEventListener("mouseover", () => optionsDiv.classList.remove("hidden"));
+    container.addEventListener("mouseout", () => optionsDiv.classList.add("hidden"));
 
     container.appendChild(button);
     container.appendChild(optionsDiv);
@@ -25,16 +29,11 @@ export const dropdown = function (name, options, optionsClassName = "", classes 
   /*
   Helper function for make();
   @description Creates a button with {@param name} which when hovered over reveals the options in a list format.
-  @param optionsDiv : HTML element - A container holding all the options.
   @returns button : HTML element. 
   */
-  const makeButton = function (optionsDiv) {
+  const makeButton = function () {
     const button = document.createElement("button");
     button.textContent = name;
-
-    //Set click event to trigger action callback function.
-    button.addEventListener("mouseover", () => optionsDiv.classList.remove("hidden"));
-    button.addEventListener("mouseout", () => optionsDiv.classList.add("hidden"));
 
     classes.forEach((additional_class) => {
       button.classList.add(additional_class);
