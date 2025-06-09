@@ -22,8 +22,8 @@ const dropdown = function (name, options, classes = []) {
     button.textContent = name;
 
     //Set click event to trigger action callback function.
-    button.addEventListener("click", () => action);
-
+    button.addEventListener("mouseover", () => action);
+    
     classes.forEach(additional_class => {
       button.classList.add(additional_class);
     });
