@@ -1,4 +1,4 @@
-  /*
+/*
   @param name : String - Name of the button.
   @param options : An Object - key is the label of the option, value is the callback function.
   @param optionsClassName : String - A class to add to all options button for styling. 
@@ -12,6 +12,14 @@ const dropdown = function (name, options, optionsClassName = "", classes = []) {
   const make = function () {
     const container = document.createElement("div");
     container.id = `div-${name}`;
+
+    const optionsDiv = makeOptionsDiv();
+    const button = makeButton(()=> optionsDiv.classList.toggle("hidden"));
+
+    container.appendChild(button);
+    container.appendChild(optionsDiv);
+
+    return container
   };
 
   /*
@@ -37,13 +45,12 @@ const dropdown = function (name, options, optionsClassName = "", classes = []) {
   /*
   Helper function for make();
   @description Creates a div holding all options.
-  @param options : An Object - key is the label of the option, value is the callback function.
   @returns div : HTML element - containing all options.
   */
   const makeOptionsDiv = function () {
     const optionsContainer = document.createElement("div");
     optionsContainer.classList.add("hidden");
-    
+
     for (let optionName in options) {
       const callbackFunction = options[optionName];
 
