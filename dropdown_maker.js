@@ -9,7 +9,7 @@ const dropdown = function (name, options, classes = []) {
   const make = function () {
     const container = document.createElement("div");
     container.id = `div-${name}`;
-  };
+  }
 
   /*
   @description Creates a button with {@param name} which when hovered over reveals the options in a list format.
@@ -29,8 +29,9 @@ const dropdown = function (name, options, classes = []) {
     });
 
     return button;
-  };
+  }
+
   return {
     make,
-  };
-};
+  }
+}
